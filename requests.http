@@ -1,0 +1,17 @@
+POST http://localhost:8000/posts HTTP/1.1
+content-type: application/json
+
+{
+    "title": "Title 2",
+    "text": "Text 2"
+}
+
+#############
+GET http://localhost:8000/posts HTTP/1.1
+content-type: application/json
+
+{
+    "id": "1",
+    "title": "Title 1",
+    "text": "Text 1"
+}
