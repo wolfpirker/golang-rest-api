@@ -1,4 +1,4 @@
-package main
+package routes
 
 import (
 	"math/rand"
@@ -15,7 +15,7 @@ var (
 	repo repository.PostRepository = repository.NewPostRepository()
 )
 
-func getPosts(resp http.ResponseWriter, req *http.Request) {
+func GetPosts(resp http.ResponseWriter, req *http.Request) {
 	resp.Header().Set("Content-type", "application/json")
 	posts, err := repo.FindAll()
 	if err != nil {
@@ -27,7 +27,7 @@ func getPosts(resp http.ResponseWriter, req *http.Request) {
 	json.NewEncoder(resp).Encode(posts)
 }
 
-func addPost(resp http.ResponseWriter, req *http.Request) {
+func AddPost(resp http.ResponseWriter, req *http.Request) {
 	resp.Header().Set("Content-type", "application/json")
 	var post entity.Post
 	err := json.NewDecoder(req.Body).Decode(&post)

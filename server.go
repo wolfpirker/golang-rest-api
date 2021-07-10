@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"github.com/wolfpirker/golang-rest-api/routes"
 )
 
 func main() {
@@ -15,8 +16,8 @@ func main() {
 		fmt.Fprintln(resp, "Up and running...")
 		// Note: fprintln to show message to the client
 	})
-	r.HandleFunc("/posts", getPosts).Methods("GET")
-	r.HandleFunc("/posts", addPost).Methods("POST")
+	r.HandleFunc("/posts", routes.GetPosts).Methods("GET")
+	r.HandleFunc("/posts", routes.AddPost).Methods("POST")
 	log.Println("Server listening on port ", port)
 	log.Fatalln(http.ListenAndServe(port, r))
 }
