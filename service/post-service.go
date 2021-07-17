@@ -20,6 +20,7 @@ var (
 	repo repository.PostRepository
 )
 
+// constructor 
 func NewPostService(repository repository.PostRepository) PostService {
 	repo = repository
 	return &service{}

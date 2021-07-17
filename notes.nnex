@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE NixNote-Export>
+<nixnote-export version="2" exportType="export" application="NixNote" applicationVersion="2.x">
+    <Note>
+        <Guid>1609509c-1848-4c03-b719-ff1b3a6bbf76</Guid>
+        <Title>Go Crash Course - Pragmatic Reviews</Title>
+        <Content><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE en-note SYSTEM 'http://xml.evernote.com/pub/enml2.dtd'><en-note style=
+"word-wrap: break-word; -webkit-nbsp-mode: space; -webkit-line-break: after-white-space;">
+
+followed tutorials:
+<div><br /></div>
+<div>
+<ul>
+<li>Building a REST API with Mux</li>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=kd-8mb6HfGA" title=
+"https://www.youtube.com/watch?v=kd-8mb6HfGA">https://www.youtube.com/watch?v=kd-8mb6HfGA</a></li>
+<ul>
+<li>part 1</li>
+</ul>
+</ul>
+<li>Connecting our REST API with Firebase Firestore Database</li>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=RHa4D6aNVpg" title=
+"https://www.youtube.com/watch?v=RHa4D6aNVpg">https://www.youtube.com/watch?v=RHa4D6aNVpg</a><br />
+</li>
+<ul>
+<li>part 2</li>
+</ul>
+</ul>
+<li>Implementing clean architecture</li>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=Yg_ae0UvCv4" title=
+"https://www.youtube.com/watch?v=Yg_ae0UvCv4">https://www.youtube.com/watch?v=Yg_ae0UvCv4</a><br />
+</li>
+<ul>
+<li>part 3</li>
+</ul>
+</ul>
+<li>part 4 - see Note: "Go Mocking with Testify (Unit Test)"</li>
+</ul>
+<div><br /></div>
+<div><br /></div>
+<div>$ go get github.com/gorilla/mux<br /></div>
+<div><br /></div>
+<div><br /></div>
+<div>part 3</div>
+<div>Clean Architecture fundamentals</div>
+<div>
+<ul>
+<li>independent of frameworks</li>
+<li>testable</li>
+<li>independent of UI</li>
+<li>independent of database</li>
+<li>independent of any external agency</li>
+</ul>
+<div>part 4 Unit testing our code by mocking with Testify</div>
+<div>
+<ul>
+<li>convention for names, example</li>
+<ul>
+<li>testing of post-service.go functions would be in</li>
+<ul>
+<li>post-service_test.go</li>
+</ul>
+</ul>
+<li>used for mocking</li>
+<ul>
+<li>mock of testify library</li>
+<li>assert package to create assertions on the data</li>
+</ul>
+<li>install testify:</li>
+<ul>
+<li><span style="background-color: rgb(255, 255, 255);">$ go get
+github.com/stretchr/testify</span><br /></li>
+</ul>
+<li>example code: test for empty post using the implemented
+constructor method&nbsp;</li>
+<ul>
+<li>
+<div style=
+"color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: 'Droid Sans Mono', monospace, monospace, 'Droid Sans Fallback'; font-size: 14px; line-height: 19px; white-space: pre;">
+<div><span style="color: #569cd6;">func</span> <span style=
+"color: #dcdcaa;">TestValidateEmptyPost</span>(t *testing.T){</div>
+<div><span style="color: #9cdcfe;">testService</span> :=
+<span style="color: #dcdcaa;">NewPostService</span>(<span style=
+"color: #569cd6;">nil</span>)</div>
+<br />
+<div><span style="color: #9cdcfe;">err</span> :=
+testService.<span style=
+"color: #dcdcaa;">Validate</span>(<span style=
+"color: #569cd6;">nil</span>)</div>
+<br />
+<div>assert.<span style="color: #dcdcaa;">NotNil</span>(t,
+err)</div>
+<div>assert.<span style=
+"color: #dcdcaa;">Equal</span>(t,&nbsp;<span style=
+"color: rgb(206, 145, 120);">"The post is empty",</span>
+err.<span style="color: rgb(220, 220, 170);">Error</span>() )</div>
+</div>
+<span style=
+"color: rgb(212, 212, 212); font-family: 'Droid Sans Mono', monospace, monospace, 'Droid Sans Fallback'; font-size: 14px; white-space: pre; background-color: rgb(30, 30, 30);">}</span>&nbsp;</li>
+</ul>
+<li>to run the test run from the path of the package service</li>
+<ul>
+<li><span style="background-color: rgb(255, 255, 255);">go
+test</span><br /></li>
+<li><span style="background-color: rgb(255, 255, 255);">or click on
+"run test" above the test methods</span></li>
+</ul>
+<li>Tests should be either passing or failing</li>
+<ul>
+<li>in our example it passes if the errror with the same message is
+returned by NewPostService</li>
+</ul>
+<li>then mock our repository</li>
+<ul>
+<li>import the package</li>
+<li>
+<div style=
+"color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: 'Droid Sans Mono', monospace, monospace, 'Droid Sans Fallback'; font-size: 14px; line-height: 19px; white-space: pre;">
+<span style=
+"color: #ce9178;">"github.com/stretchr/testify/mock"</span></div>
+</li>
+</ul>
+<li>type mockcRepository:</li>
+<ul>
+<li>
+<div style=
+"color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: 'Droid Sans Mono', monospace, monospace, 'Droid Sans Fallback'; font-size: 14px; line-height: 19px; white-space: pre;">
+<div><span style="color: #569cd6;">type</span> <span style=
+"color: #4ec9b0;">mockRepository</span> <span style=
+"color: #569cd6;">struct</span> {</div>
+<div>mock.Mock</div>
+<div>}</div>
+</div>
+</li>
+</ul>
+<li>copy methods definitions from the posts-repo.go</li>
+<ul>
+<li>from:</li>
+<ul>
+<li>
+<div style=
+"color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: 'Droid Sans Mono', monospace, monospace, 'Droid Sans Fallback'; font-size: 14px; line-height: 19px; white-space: pre;">
+<div><span style="color: #dcdcaa;">Save</span>(post *entity.Post)
+(*entity.Post, <span style="color: #4ec9b0;">error</span>)</div>
+<div><span style="color: #dcdcaa;">FindAll</span>() ([]entity.Post,
+<span style="color: #4ec9b0;">error</span>)</div>
+</div>
+</li>
+</ul>
+<li>change to:</li>
+<ul>
+<li>
+<div style=
+"color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: 'Droid Sans Mono', monospace, monospace, 'Droid Sans Fallback'; font-size: 14px; line-height: 19px; white-space: pre;">
+<div><span style="color: #569cd6;">func</span> (mock
+*MockRepository) <span style="color: #dcdcaa;">Save</span>(post
+*entity.Post) (*entity.Post, <span style=
+"color: #4ec9b0;">error</span>){
+<div style=
+"font-family: 'Droid Sans Mono', monospace, monospace, 'Droid Sans Fallback'; line-height: 19px;">
+<div><span style="color: #9cdcfe;">args</span> := mock.<span style=
+"color: #dcdcaa;">Called</span>()</div>
+<div><span style="color: #9cdcfe;">result</span> :=
+args.<span style="color: #dcdcaa;">Get</span>(<span style=
+"color: #b5cea8;">0</span>)</div>
+<div><span style="color: #c586c0;">return</span>
+result.(*entity.Post), args.<span style=
+"color: #dcdcaa;">Error</span>(<span style=
+"color: #b5cea8;">1</span>)</div>
+</div>
+</div>
+</div>
+<div style=
+"color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: 'Droid Sans Mono', monospace, monospace, 'Droid Sans Fallback'; font-size: 14px; line-height: 19px; white-space: pre;">
+<br />
+<div>}</div>
+<div><span style="color: #569cd6;">func</span> (mock
+*MockRepository) <span style="color: #dcdcaa;">FindAll</span>()
+([]entity.Post, <span style="color: #4ec9b0;">error</span>){</div>
+// more code<br />
+<div>}</div>
+</div>
+</li>
+</ul>
+</ul>
+<li>see TestFindAll Method in post-service_test.go</li>
+<li>lastly a test for Create function from post-service.go is
+implemented</li>
+<li><br /></li>
+</ul>
+<div><br /></div>
+</div>
+<div><br /></div>
+<div><br /></div>
+</div>
+</div>
+</en-note>]]></Content>
+        <ContentLength>6730</ContentLength>
+        <Created>1624203880143</Created>
+        <Updated>1626524105854</Updated>
+        <Active>true</Active>
+        <UpdateSequenceNumber>0</UpdateSequenceNumber>
+        <NotebookGuid>a3e38484-8dd9-4cba-9e43-8c43fb71bb61</NotebookGuid>
+        <Attributes>
+            <Author>wolfi</Author>
+        </Attributes>
+        <Dirty>true</Dirty>
+    </Note>
+</nixnote-export>
